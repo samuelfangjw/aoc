@@ -8,9 +8,7 @@ gamma = ""
 epsilon = ""
 
 for i in range(len(input1[0]) - 1):
-    num_ones = 0
-    for line in input1:
-        num_ones = num_ones + int(line[i])
+    num_ones = sum([int(x[i]) for x in input1])
     num_zeros = rows - num_ones
 
     if num_ones >= num_zeros:
@@ -28,11 +26,7 @@ co2 = input2[:]
 
 # Calculate oxygen generator rating
 for i in range(len(oxygen[0]) - 1):
-    if len(oxygen) == 1:
-        break
-    num_ones = 0
-    for line in oxygen:
-        num_ones = num_ones + int(line[i])
+    num_ones = sum([int(x[i]) for x in oxygen])
     num_zeros = len(oxygen) - num_ones
     if num_ones >= num_zeros:
         oxygen = list(filter(lambda x: x[i] == "1", oxygen))
@@ -43,9 +37,7 @@ for i in range(len(oxygen[0]) - 1):
 for i in range(len(co2[0]) - 1):
     if len(co2) == 1:
         break
-    num_ones = 0
-    for line in co2:
-        num_ones = num_ones + int(line[i])
+    num_ones = sum([int(x[i]) for x in co2])
     num_zeros = len(co2) - num_ones
     if num_ones >= num_zeros:
         co2 = list(filter(lambda x: x[i] == "0", co2))
