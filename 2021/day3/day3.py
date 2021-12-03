@@ -29,9 +29,9 @@ for i in range(len(oxygen[0]) - 1):
     num_ones = sum([int(x[i]) for x in oxygen])
     num_zeros = len(oxygen) - num_ones
     if num_ones >= num_zeros:
-        oxygen = list(filter(lambda x: x[i] == "1", oxygen))
+        oxygen = [x for x in oxygen if x[i] == "1"]
     else:
-        oxygen = list(filter(lambda x: x[i] == "0", oxygen))
+        oxygen = [x for x in oxygen if x[i] == "0"]
 
 # Calculate CO2 scrubber rating
 for i in range(len(co2[0]) - 1):
@@ -40,9 +40,9 @@ for i in range(len(co2[0]) - 1):
     num_ones = sum([int(x[i]) for x in co2])
     num_zeros = len(co2) - num_ones
     if num_ones >= num_zeros:
-        co2 = list(filter(lambda x: x[i] == "0", co2))
+        co2 = [x for x in co2 if x[i] == "0"]
     else:
-        co2 = list(filter(lambda x: x[i] == "1", co2))
+        co2 = [x for x in co2 if x[i] == "1"]
 
 part2 = int(oxygen[0], 2) * int(co2[0], 2)
 
