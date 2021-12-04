@@ -30,7 +30,7 @@ while winning_board == -1:
 part1 = calculate_score(boards[winning_board], nums[len(marked) - 1])
 
 # Part 2
-boards_left = [i for i in range(len(boards))]
+boards_left = list(range(len(boards)))
 last_board = -1
 
 while boards_left:
