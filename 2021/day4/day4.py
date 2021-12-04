@@ -12,6 +12,10 @@ def win(board):
     return any(all(x in marked for x in row) for row in board) \
         or any(all(x in marked for x in [y[col] for y in board]) for col in range(5))
 
+def calculate_score(board, num):
+    unmarked = sum([sum([num for num in row if num not in marked]) for row in board])
+    return unmarked * num
+
 # Part 1
 marked = set(nums[:4])
 winning_board = -1
@@ -23,8 +27,7 @@ while winning_board == -1:
             winning_board = i
             break
 
-unmarked = sum([sum([num for num in row if num not in marked]) for row in boards[winning_board]])
-part1 = unmarked * nums[len(marked) - 1]
+part1 = calculate_score(boards[winning_board], nums[len(marked) - 1])
 
 # Part 2
 boards_left = [i for i in range(len(boards))]
@@ -36,8 +39,7 @@ while boards_left:
     if len(boards_left) == 1:
         last_board = boards_left[0]
 
-unmarked = sum([sum([num for num in row if num not in marked]) for row in boards[last_board]])
-part2 = unmarked * nums[len(marked) - 1]
+part2 = calculate_score(boards[last_board], nums[len(marked) - 1])
 
 print(part1)
 print(part2)
