@@ -7,7 +7,7 @@ data = []
 with open(file) as f:
     for line in f:
         line = line.strip()
-        data.append([x for x in line])
+        data.append(line)
 
 legal =[]
 
