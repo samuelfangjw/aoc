@@ -12,7 +12,7 @@ with open(file) as f:
         if a != 'start':
             data[b].append(a)
 
-def bfs(x, visited):
+def dfs(x, visited):
     global part1, part2
     if x == 'end':
         if not visited[0]:
@@ -21,16 +21,16 @@ def bfs(x, visited):
         return
     for y in data[x]:
         if x.isupper():
-            bfs(y, visited)
+            dfs(y, visited)
         elif x not in visited:
-            bfs(y, visited + [x])
+            dfs(y, visited + [x])
         elif not visited[0]:
-            bfs(y, [True] + visited[1:])
+            dfs(y, [True] + visited[1:])
 
 part1 = 0
 part2 = 0
 
-bfs('start', [False])
+dfs('start', [False])
 
 print(part1)
 print(part2)
