@@ -20,3 +20,4 @@ for idx, n in enumerate(part2):
     if n >= target:
         print(idx)
         break
+    
