@@ -39,7 +39,7 @@ maxY = max(y for _,y in dots) + 1
 G = [[' ' for _ in range(maxY)] for _ in range(maxX)]
 
 for x,y in dots:
-    G[x][y] = "#"
+    G[x][y] = "\u2588"
 
 for x in G:
     print("".join(x))
