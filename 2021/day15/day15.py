@@ -19,7 +19,6 @@ def get_neighbours(x,y):
 def solve():
     global rows, cols, visited
     pq = []
-    heapq.heappush(pq, (0, (0,0)))
     visited = set()
     rows = len(grid)
     cols = len(grid[0])
@@ -39,6 +38,6 @@ def solve():
 solve()
 
 f = lambda i, j: (grid[j % len(grid[0])][i % len(grid)] + i // len(grid) + j // len(grid[0]) - 1) % 9 + 1
-grid = [[f(i,j) for i in range(len(grid[0])*5)] for j in range(len(grid)*5)]
+grid = [[f(i,j) for i in range(len(grid[0]) * 5)] for j in range(len(grid) * 5)]
 
 solve()
