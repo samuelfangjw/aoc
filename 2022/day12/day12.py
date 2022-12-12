@@ -14,10 +14,6 @@ for line in data:
 
 d = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 
-S = None
-E = None
-possible = []
-
 for i in range(len(map)):
     for j in range(len(map[0])):
         if map[i][j] == 'S':
@@ -26,26 +22,27 @@ for i in range(len(map)):
         elif map[i][j] == 'E':
             E = (i, j)
             map[i][j] = 'z'
-        if map[i][j] == 'a':
-            possible.append((i, j))
 
+seen = set()
+queue = deque()
+queue.append((E, 0))
 
-def get_dist(start):
-    curr = {}
-    queue = deque()
-    queue.append((start, 0))
-    while queue:
-        (x, y), dist = queue.pop()
+part2 = 10000
+while queue:
+    (x, y), dist = queue.pop()
 
-        if (x, y) not in curr or dist < curr[(x, y)]:
-            curr[(x, y)] = dist
-            for r, c in d:
-                if 0 <= x+r < len(map) and 0 <= y+c < len(map[0]) and ord(map[x+r][y+c]) - ord(map[x][y]) <= 1:
-                    queue.appendleft(((x+r, y+c), dist + 1))
-    return curr.get(E, None)
+    if (x, y) in seen:
+        continue
+    seen.add((x, y))
 
+    if map[x][y] == 'a':
+        part2 = min(dist, part2)
+    if (x, y) == S:
+        part1 = dist
 
-part1 = get_dist(S)
-part2 = min([d for d in [get_dist((x, y)) for x, y in possible] if d])
+    for r, c in d:
+        if 0 <= x+r < len(map) and 0 <= y+c < len(map[0]) and ord(map[x][y]) - ord(map[x+r][y+c]) <= 1:
+            queue.appendleft(((x+r, y+c), dist + 1))
+
 print(part1)
 print(part2)
