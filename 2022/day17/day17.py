@@ -6,6 +6,7 @@ file = sys.argv[1] if len(sys.argv) > 1 else "input.txt"
 with open(file) as f:
     data = f.read().strip()
 
+# x and y values are flipped, too lazy to change :)
 rocks = [[(0, 2), (0, 3), (0, 4), (0, 5)], [(0, 3), (1, 3), (2, 3), (1, 2), (1, 4)], [
     (0, 2), (0, 3), (0, 4), (1, 4), (2, 4)], [(0, 2), (1, 2), (2, 2), (3, 2)], [(0, 2), (0, 3), (1, 2), (1, 3)]]
 
@@ -44,6 +45,7 @@ def find(n):
         past.append(rock[0][1])
         past.popleft()
 
+        # cycle found
         if i % len(data) > pastl:
             strpast = str(past)
             if strpast in seen:
