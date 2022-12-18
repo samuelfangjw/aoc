@@ -1,3 +1,3 @@
 # Advent of Code
 
-Just having some fun with this :)
+My solutions for the puzzles at https://adventofcode.com.
