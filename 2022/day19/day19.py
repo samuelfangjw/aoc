@@ -18,14 +18,14 @@ for line in data.splitlines():
 def solve(idx, mins):
     (ore, clay, obsore, obsclay, geodeore, geodeobsidian) = blueprints[idx]
     maxsofar = 0
-    queue = deque()
+    stack = []
     # ore, clay, obsidian, open-geodes
-    queue.append((mins, (1, 0, 0, 0), (0, 0, 0, 0)))
+    stack.append((mins, (1, 0, 0, 0), (0, 0, 0, 0)))
     seen = set()
     maxore = max(obsore, ore, clay, geodeore)
 
-    while queue:
-        m, (o, c, ob, g), (om, cm, obm, gm) = queue.popleft()
+    while stack:
+        m, (o, c, ob, g), (om, cm, obm, gm) = stack.pop()
 
         om = min(maxore * (m+1), om)
         cm = min(obsclay * (m+1), cm)
@@ -48,31 +48,30 @@ def solve(idx, mins):
 
         if build[3]:
             # always build geode bots
-            queue.append((m - 1, (o, c, ob, g+1),
+            stack.append((m - 1, (o, c, ob, g+1),
                          (om+o-geodeore, cm+c, obm+ob-geodeobsidian, gm+g)))
         else:
             # build ore bot
             if build[0] and maxore * m >= om:
-                queue.append((m - 1, (o+1, c, ob, g),
+                stack.append((m - 1, (o+1, c, ob, g),
                              (om+o-ore, cm+c, obm+ob, gm+g)))
             # build clay bot
             if build[1] and obsclay * m >= cm:
-                queue.append((m - 1, (o, c+1, ob, g),
+                stack.append((m - 1, (o, c+1, ob, g),
                              (om+o-clay, cm+c, obm+ob, gm+g)))
             # build obsidian bot
             if build[2] and geodeobsidian * m >= obm:
-                queue.append((m - 1, (o, c, ob+1, g),
+                stack.append((m - 1, (o, c, ob+1, g),
                              (om+o-obsore, cm+c-obsclay, obm+ob, gm+g)))
             # skip building bot
             if not all(build):
-                queue.append((m - 1, (o, c, ob, g),
+                stack.append((m - 1, (o, c, ob, g),
                               (om+o, cm+c, obm+ob, gm+g)))
 
     return maxsofar
 
 
-# Unoptimized brute force solution
-# Runs in 9-10 mins
+# Runs in about 2 mins
 part1 = 0
 part2 = 1
 for idx in blueprints.keys():
