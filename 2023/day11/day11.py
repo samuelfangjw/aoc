@@ -38,7 +38,6 @@ def solve(size):
             r1,c1 = galaxies[x]
             r2,c2 = galaxies[y]
             ans += abs(r1-r2) + abs(c1-c2)
-    print(galaxies)
     return ans
 
 part1, part2 = solve(2), solve(1000000)
