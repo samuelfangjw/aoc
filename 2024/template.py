@@ -1,3 +1,4 @@
+from functools import cache
 import sys
 import itertools
 import re
