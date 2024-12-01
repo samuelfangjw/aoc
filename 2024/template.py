@@ -14,6 +14,8 @@ with open(file) as f:
     for line in f:
         line = line.strip()
         # line = line.strip().split()
+        # res = re.search('abc-(\d+)-(.+)-', line)
+        # data.append(res.groups())
         data.append(line)
         # data.append([int(x) for x in line])
 
