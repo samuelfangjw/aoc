@@ -15,23 +15,15 @@ for line in lines:
     dsts = [d.strip() for d in raw[1].strip().split()]
     nodes[src].extend(dsts)
 
-visited = set()
-
 
 @cache
 def dfs(node, end):
     if node == end:
         return 1
 
-    if not nodes[node]:
-        return 0
-
-    visited.add(node)
     res = 0
     for n in nodes[node]:
-        if n not in visited:
-            res += dfs(n, end)
-    visited.remove(node)
+        res += dfs(n, end)
 
     return res
 
